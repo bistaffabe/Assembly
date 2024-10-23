@@ -1,27 +1,27 @@
 title lab06_02
 .model small
 .stack 100h 
-.code            
+.code
 main proc
-xor cx,cx
-conta: 
-    MOV AH,01 
-    INT 21H
-    ; CMP AL,13 
+              xor  cx,cx
+    conta:    
+              MOV  AH,01
+              INT  21H
+    ; CMP AL,13
     ; JE asterisco
-    inc cx
-    CMP AL,13 
-    JNZ conta 
+              inc  cx
+              CMP  AL,13
+              JNZ  conta
 
-asterisco: 
+    asterisco:
 
-    mov ah,02 
-    mov dl,'*'
-    int 21h 
-    loop asterisco
+              mov  ah,02
+              mov  dl,'*'
+              int  21h
+              loop asterisco
 
-    mov ah,4ch 
+              mov  ah,4ch
 
 
-main endp   
+main endp
 end main 
