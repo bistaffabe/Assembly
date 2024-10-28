@@ -1,3 +1,5 @@
+;ENTRADA BINÁRIA 
+
 title exercicio1
 .model small
 .code 

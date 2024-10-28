@@ -1,3 +1,5 @@
+
+;ENTRADA HEXADECIMAL 
 title exercicio3 
 .model small
 .code      

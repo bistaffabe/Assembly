@@ -6,40 +6,61 @@
 TITLE VETOR5
 .MODEL SMALL     
 .DATA          
-    VETOR DB 1,2,3,4,5,6,7
+    VETOR DB 7 DUP('*')
 .CODE        
 MAIN PROC     
     MOV AX,@DATA  
     MOV DS,AX  
+
     LEA BX, VETOR
     MOV CX, 7       
-    CALL PROGRAMA
-
+    CALL LEIA
+    call imprime          
+    CALL INVERTA
+    CALL IMPRIME
     MOV AH,4CH 
     INT 21H 
-MAIN ENDP 
+MAIN ENDP
 
-PROGRAMA PROC 
-    ; LEA BX,VETOR 
-    ; MOV CX,7
-
- LEIA: 
+ LEIA PROC 
+    XOR BX,BX
     MOV AH,01
+LER:  
     INT 21H 
-    MOV VETOR[BX],AL              
+    MOV [BX],AL              
     INC BX 
-    LOOP LEIA 
+    LOOP LER
+    RET 
+LEIA ENDP 
 
-    MOV BX,6 
-    MOV CX,7
+INVERTA PROC
+    XOR BX,BX 
+    MOV SI,6
+    MOV CX,3
 
- IMPRIME:
-    MOV AH,02 
-    MOV DL,VETOR[BX]
-    OR DL,30H 
-    INT 21H 
-    DEC BX 
-    LOOP IMPRIME 
+ INVERT: 
+
+    MOV AL,VETOR[BX]
+    XCHG AL,VETOR[SI]
+    MOV VETOR[BX],AL
+    DEC SI
+    INC BX
+    LOOP INVERT
     RET
-PROGRAMA ENDP        
+
+INVERTA ENDP 
+
+IMPRIME PROC 
+    XOR BX,BX
+    MOV AH,02 
+    mov dl,10
+    int 21h
+    MOV CX,7
+ IMPR:
+    MOV DL,VETOR[BX] 
+    INT 21H 
+    inc BX 
+    LOOP IMPR 
+    RET
+IMPRIME ENDP  
 END MAIN          

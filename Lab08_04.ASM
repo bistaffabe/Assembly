@@ -1,3 +1,4 @@
+;SAIDA HEXADECIMAL 
 title exercicio4
 .model small
 .code               
@@ -17,7 +18,7 @@ shr dl,4
 ;cmp com 10
 cmp dl,10
 ;se for menor vai para o rótulo numero 
-jbe numero 
+jb numero 
 ;adiciona 37h para transf em letra
 add dl,37h 
 ;realiza a funcao2

@@ -1,3 +1,5 @@
+
+;SAÍDA BINÁRIA 
 title exercicio2
 .model small
 .code       
