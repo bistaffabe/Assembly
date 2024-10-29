@@ -6,7 +6,7 @@ title vetor1
 main proc
           MOV  AX,@data    ;acesso as variaveis
           MOV  DS,AX
-        CALL PROGRAMA
+          CALL PROGRAMA 
           MOV  AH,4CH
           INT  21H
 main endp

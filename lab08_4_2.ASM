@@ -1,3 +1,4 @@
+;SAIDA HE
 title exercicio4_1
 .model small
 .data
@@ -9,7 +10,7 @@ main proc
             mov  ds,ax
 
     ;inicializa bx com o numero 32
-            mov  bx,10
+            mov  bx,32
 
 
     ;contador recebe 4

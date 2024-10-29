@@ -10,7 +10,7 @@ xor bx,bx
 mov ah,01h 
 ;contador recebe 4 
 mov cx,4 
-le:
+LE:
 ;realiza a funcao 
 int 21h 
 ;comparacao com o carriage return 
@@ -23,7 +23,7 @@ and al,0fh
 shl bx,4
 ;faz o OR para passar o numero para o byte menos significativo do bx
 or bl,al
-loop le
+loop LE
 
 fim: 
 ;finaliza o programa 
