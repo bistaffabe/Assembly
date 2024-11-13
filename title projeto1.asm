@@ -29,6 +29,8 @@ resultado macro numero      ;macro para imprimir a string quando uma embarcaçã
     pop ax
 ENDM
 .data
+    v_impressaocolunas db  1 , 2, 3, 4, 5, 6, 7, 8, 9, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0
+    impressaolinhas db 0
     ;matriz das posicoes das embarcacoes, ela será utilizada na conferencia
     m_embarcacoes db  20 DUP (0)                
                   db  0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 
@@ -86,7 +88,6 @@ ENDM
     l_eliminou_submarino db 10, 13, 'Voce eliminou uma embarcacao de submarino.$'
     l_eliminou_hidroaviao db 10, 13, 'Voce eliminou uma embarcacao de hidroaviao.$'
     v_acertos db 6 dup (0)
-    v_contagem db 
     l_essaposicaojafoiacertada db 10,13, 'Essa posicao ja foi acertada :($'
     l_venceu db 10,13, 'Todas embarcacoes foram afundadas, voce venceu!!!!$'
 
@@ -240,17 +241,39 @@ r_eliminou_hidroaviao_2:                        ;ACERTO DA CELULA DO SEGUNDO HID
 
 r_saida:                            ;impressão da matriz atualizada com os tiros dados
     pula_linha
+    mov cx,20
+    mov ah,02
+    xor bl,bl
+    espaco
+
+imp:
+    mov ah,02
+    mov dl,v_impressaocolunas[bx]
+    or dl,30h
+    int 21h
+    espaco
+    inc bl
+    loop imp
+    
+
     xor bx, bx
     mov di, 20
+    pula_linha
+
 r_linha_impressao:
+    mov ah, 2
+    mov dl, impressaolinhas
+    or dl,30h
+    int 21h
+    inc impressaolinhas
     xor si, si
     mov cx, 20
 r_coluna_impressao:
-    mov ah, 2
+    espaco
     mov dl, m_tiros[bx][si]
     or dl, 30h
     int 21h
-    espaco
+    
     inc si
 loop r_coluna_impressao
     pula_linha
@@ -375,3 +398,57 @@ end main
 
     
 
+;linhas e colunas 
+   ; xor bl,bl
+;     xor bx,bx
+;     espaco
+;     mov di,20
+; loop_impd:
+;     mov bl, impressaocolunas[0]
+; imp:
+;     mov ax,bx
+;     mov bx,10
+;     xor cx,cx
+; vai_imp:
+;     xor dx,dx 
+;     div bx
+;     push dx
+;     inc cx
+;     cmp ax,0
+;     je imprimedecimal
+;     jmp vai_imp
+
+; imprimedecimal:
+     
+;     mov ah, 2
+;     pop dx
+;     or dl, 30h
+;     int 21h
+;     dec di
+;     jz sai
+
+    ; mov ah,02
+    ; mov dl,v_impressaocolunas[bx]
+    ; or dl,30h
+    ; int 21h
+    ; espaco
+    ; inc bl
+    ; loop imp
+    
+
+;     @decimal proc                   ; funcao que imprime decimal
+;     mov ax, bx
+;     mov bx, 10
+;     xor cx, cx
+; @deci:
+;     xor dx, dx
+;     div bx
+;     push dx
+;     inc cx
+;     cmp ax, 0
+;     je imprimed
+; jmp @deci
+
+;     xor bx, bx
+;     mov di, 20
+;     pula_linha
