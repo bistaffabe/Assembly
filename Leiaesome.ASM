@@ -81,6 +81,6 @@ main proc
 
 main endp
 end main
-Melhorias e Correções:
-Conversão de ASCII para valor numérico: Quando um número é lido via int 21h, ele é lido como um caractere ASCII. Para convertê-lo em um número válido, subtrai-se '0' (48 em decimal).
+
+
 
